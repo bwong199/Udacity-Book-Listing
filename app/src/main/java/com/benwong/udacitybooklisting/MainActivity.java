@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -29,18 +30,36 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> arrayAdapter;
     private EditText booksearchTF;
     private Button findBookBTN;
+    private TextView instructionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+        if (savedInstanceState != null)
+        {
+
+            bookList = savedInstanceState.getStringArrayList("headerList");
+        }
+
+
+
         bookListView = (ListView) findViewById(R.id.bookListView);
         booksearchTF = (EditText) findViewById(R.id.booksearchTF);
         findBookBTN = (Button) findViewById(R.id.findBookBTN);
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bookList);
+        instructionTV = (TextView)findViewById(R.id.instructionTV);
 
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bookList);
+        bookListView.setAdapter(arrayAdapter);
+
+        if(!bookList.isEmpty()){
+            instructionTV.setText("");
+        }
 
         findBookBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putStringArrayList("headerList",  bookList);
+        super.onSaveInstanceState(outState);
     }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
@@ -134,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 bookListView.setAdapter(arrayAdapter);
+
+                if(!bookList.isEmpty()){
+                    instructionTV.setText("");
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "No results found.", Toast.LENGTH_LONG).show();
             }

@@ -19,15 +19,23 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/booksearchTF" android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/bookListView" android:layout_alignEnd="@+id/bookListView"
-        android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+        android:id="@+id/booksearchTF"
         android:hint="Enter text to search for books" android:textColor="#010101"
-    />
+        android:layout_below="@+id/instructionTV" android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Books"
         android:id="@+id/findBookBTN"
         android:layout_below="@+id/booksearchTF" android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Put in search term text field and press FIND BOOKS button to find books"
+        android:id="@+id/instructionTV" android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+        android:lines="3" android:textAlignment="center"/>
 </RelativeLayout>
